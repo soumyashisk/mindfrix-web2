@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MindFrix Terms & Conditions. Read our terms of service governing AI integrations, system development, and websites.">
+<meta name="keywords" content="Terms and conditions, Terms of Service, MindFrix, AI systems">
+<meta name="author" content="MindFrix">
+<meta name="robots" content="noindex, follow">
+<title>Terms &amp; Conditions — MindFrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,1,0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ─── DESIGN TOKENS ─────────────────────────────────────── */
+:root {
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --orange:      #F4673A;
+  --orange-soft: #FFF0EB;
+  --orange-mid:  #FFDDCF;
+  --bg:          #FAFAF8;
+  --bg2:         #F4F3EF;
+  --surface:     rgba(255,255,255,0.72);
+  --surface2:    rgba(255,255,255,0.45);
+  --border:      rgba(0,0,0,0.07);
+  --border2:     rgba(0,0,0,0.05);
+  --text-1:      #111110;
+  --text-2:      #5A5955;
+  --text-3:      #9B9894;
+  --badge-bg:    rgba(244,103,58,0.1);
+  --badge-text:  #C04020;
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --r-xl: 40px;
+  --glass: blur(20px) saturate(1.6);
+}
+
+/* ─── RESET ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at top, rgba(244,103,58,0.06), transparent 36%), linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0));
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ─── MATERIAL ICONS ─────────────────────────────────────── */
+.mi {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* ─── NOISE TEXTURE ─────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ─── AMBIENT BLOBS ──────────────────────────────────────── */
+.ambient {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.blob {
+  position: absolute; border-radius: 50%; filter: blur(100px);
+}
+.blob-1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(244,103,58,0.12) 0%, transparent 70%); top: -200px; right: -150px; }
+.blob-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(244,180,58,0.08) 0%, transparent 70%); bottom: 200px; left: -100px; }
+.blob-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(244,103,58,0.06) 0%, transparent 70%); bottom: -100px; right: 30%; }
+
+/* ─── NAV ────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 200; padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1140px;
+  margin: 16px auto 0;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 999px;
+  padding: 10px 10px 10px 24px;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s;
+}
+.nav-inner.scrolled {
+  box-shadow: 0 4px 40px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-logo img { height: 28px; width: auto; }
+.nav-logo-fallback {
+  font-family: var(--font-display); font-size: 17px; font-weight: 600; color: var(--text-1);
+}
+.nav-logo-fallback span { color: var(--orange); }
+.nav-links {
+  display: flex; gap: 4px; list-style: none; margin-left: auto;
+}
+.nav-links a {
+  padding: 7px 14px; border-radius: 999px;
+  font-size: 14px; font-weight: 400; color: var(--text-2);
+  transition: background 0.18s, color 0.18s;
+}
+.nav-links a:hover { background: var(--bg2); color: var(--text-1); }
+
+/* hamburger */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 8px; border-radius: 12px;
+  background: transparent; border: none;
+  margin-left: auto;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text-1); border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* mobile nav drawer */
+.mobile-nav-drawer {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  z-index: 199;
+  padding: 90px 24px 40px;
+  transform: translateY(-100%);
+  transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  border-bottom: 1px solid var(--border);
+}
+.mobile-nav-drawer.open { transform: translateY(0); }
+.mobile-nav-links { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.mobile-nav-links a {
+  display: block; padding: 14px 16px;
+  font-size: 18px; font-weight: 500; color: var(--text-1);
+  border-radius: var(--r-md);
+  transition: background 0.18s, color 0.18s;
+}
+.mobile-nav-links a:hover { background: var(--orange-soft); color: var(--orange); }
+.mobile-nav-cta { margin-top: 20px; }
+.mobile-nav-cta .btn-primary { width: 100%; justify-content: center; padding: 14px 24px; font-size: 15px; }
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--orange); color: #fff; border: none;
+  border-radius: 999px; padding: 9px 20px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: background 0.18s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.btn-primary:hover { background: #e05530; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(244,103,58,0.3); }
+.btn-primary .mi { font-size: 17px; }
+
+/* ─── WRAPPER ────────────────────────────────────────────── */
+.wrap { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+/* ─── HERO HEADER ───────────────────────────────────────── */
+.hero {
+  padding: 160px 24px 60px;
+  position: relative; z-index: 1;
+  text-align: center;
+  max-width: 860px; margin: 0 auto;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange-soft);
+  border: 1px solid var(--orange-mid);
+  border-radius: 999px; padding: 6px 14px;
+  font-size: 13px; font-weight: 500; color: var(--badge-text);
+  margin-bottom: 28px;
+}
+.hero-chip .mi { font-size: 15px; }
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 600; line-height: 1.1;
+  letter-spacing: -0.02em; color: var(--text-1);
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-size: 17px; font-weight: 400; color: var(--text-2);
+  line-height: 1.7; max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ─── CONTENT SECTION ───────────────────────────────────── */
+.legal-section {
+  position: relative; z-index: 1;
+  padding: 0 24px 96px;
+}
+.legal-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Sticky Sidebar Table of Contents */
+.legal-sidebar {
+  position: sticky;
+  top: 100px;
+  background: var(--surface);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.sidebar-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.toc-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.18s, padding-left 0.18s;
+  cursor: pointer;
+}
+.toc-link:hover, .toc-link.active {
+  color: var(--orange);
+  padding-left: 4px;
+}
+.toc-link .mi {
+  font-size: 15px;
+  opacity: 0;
+  transition: opacity 0.18s;
+}
+.toc-link:hover .mi, .toc-link.active .mi {
+  opacity: 1;
+}
+
+/* Legal Content Body */
+.legal-content-card {
+  background: var(--surface);
+  backdrop-filter: var(--glass);
+  -webkit-backdrop-filter: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 48px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+}
+.legal-body {
+  color: var(--text-2);
+  font-size: 15px;
+  line-height: 1.8;
+}
+.legal-body p {
+  margin-bottom: 24px;
+}
+.legal-section-block {
+  margin-bottom: 48px;
+  scroll-margin-top: 110px; /* Offset for sticky nav */
+}
+.legal-section-block:last-child {
+  margin-bottom: 0;
+}
+.legal-section-block h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.legal-section-block h2 .mi {
+  color: var(--orange);
+  font-size: 20px;
+}
+.legal-section-block h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-1);
+  margin: 20px 0 10px;
+}
+.legal-body ul, .legal-body ol {
+  margin: 16px 0 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.legal-body li::marker {
+  color: var(--orange);
+}
+.legal-body li {
+  padding-left: 4px;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+.contact-section {
+  position: relative; z-index: 1;
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 80px 24px 40px;
+}
+.contact-inner { max-width: 1140px; margin: 0 auto; }
+.footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+.footer-logo img { height: 32px; margin-bottom: 14px; }
+.footer-logo-text {
+  font-family: var(--font-display); font-size: 20px;
+  font-weight: 600; color: var(--text-1); margin-bottom: 14px;
+}
+.footer-logo-text span { color: var(--orange); }
+.footer-tagline { font-size: 14px; color: var(--text-2); line-height: 1.7; max-width: 240px; }
+.footer-col-title { font-size: 13px; font-weight: 600; color: var(--text-1); margin-bottom: 18px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.footer-links a {
+  font-size: 14px; color: var(--text-2);
+  display: flex; align-items: center; gap: 8px; transition: color 0.18s;
+}
+.footer-links a:hover { color: var(--orange); }
+.footer-links .mi { font-size: 16px; color: var(--text-3); }
+.footer-links a:hover .mi { color: var(--orange); }
+
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; padding-top: 24px; border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--text-3);
+}
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-bottom-link {
+  transition: color 0.18s ease;
+}
+.footer-bottom-link:hover {
+  color: var(--orange);
+}
+.footer-bullet {
+  opacity: 0.5;
+  user-select: none;
+}
+
+/* ─── SCROLL PROGRESS BAR ────────────────────────────────── */
+.progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px;
+  background: var(--orange); z-index: 9999;
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.gsap-reveal { visibility: hidden; }
+
+/* ─── MOBILE ─────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .legal-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .legal-sidebar {
+    position: static;
+    padding: 18px;
+  }
+  .toc-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+  .toc-link {
+    font-size: 12px;
+  }
+}
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .btn-primary.nav-cta-desktop { display: none; }
+  .nav-inner { padding: 10px 10px 10px 18px; }
+
+  .hero { padding: 120px 24px 48px; text-align: left; }
+  .hero-sub { margin-left: 0; max-width: 100%; }
+
+  .legal-content-card {
+    padding: 28px 24px;
+    border-radius: var(--r-lg);
+  }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 600px) {
+  .hero-h1 { font-size: 2.2rem; }
+  .hero { padding: 110px 24px 40px; }
+}
+@media (min-width: 860px) {
+  .mobile-nav-drawer { display: none !important; }
+}
+</style>
+<noscript>
+  <style>
+    .gsap-reveal { visibility: visible !important; opacity: 1 !important; }
+  </style>
+</noscript>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="ambient">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner" id="navInner">
+    <a class="nav-logo" href="index.html">
+      <img src="https://www.mindfrix.com/mindfrix_logo.svg" alt="MindFrix"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block'">
+      <span id="logo-fallback" style="display:none" class="nav-logo-fallback">Mind<span>Frix</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#usecases">Use Cases</a></li>
+      <li><a href="index.html#clients">Clients</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn-primary nav-cta-desktop" style="margin-left:auto">
+      Let's Connect <span class="mi">arrow_forward</span>
+    </a>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-nav-drawer" id="mobileDrawer">
+  <ul class="mobile-nav-links">
+    <li><a href="index.html#services" class="drawer-link">Services</a></li>
+    <li><a href="index.html#usecases" class="drawer-link">Use Cases</a></li>
+    <li><a href="index.html#clients" class="drawer-link">Clients</a></li>
+    <li><a href="index.html#contact" class="drawer-link">Contact</a></li>
+  </ul>
+  <div class="mobile-nav-cta">
+    <a href="index.html#contact" class="btn-primary drawer-link">
+      Let's Connect <span class="mi">arrow_forward</span>
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero wrap">
+  <div class="hero-chip gsap-reveal" id="heroChip">
+    <span class="mi">gavel</span> TERMS OF SERVICE
+  </div>
+  <h1 class="hero-h1 gsap-reveal" id="heroH1">
+    Terms &amp; Conditions
+  </h1>
+  <p class="hero-sub gsap-reveal" id="heroSub">
+    Last Updated: May 31, 2026. Please read these terms carefully before engaging with our services or utilizing our intelligent automation systems.
+  </p>
+</div>
+
+<!-- CONTENT LAYOUT -->
+<div class="legal-section wrap">
+  <div class="legal-layout">
+    <!-- Sidebar Table of Contents -->
+    <aside class="legal-sidebar gsap-reveal" id="legalSidebar">
+      <h2 class="sidebar-title">Sections</h2>
+      <ul class="toc-list">
+        <li><a href="#agreement" class="toc-link active"><span class="mi">chevron_right</span> 1. Agreement</a></li>
+        <li><a href="#ipr" class="toc-link"><span class="mi">chevron_right</span> 2. Intellectual Property</a></li>
+        <li><a href="#user-conduct" class="toc-link"><span class="mi">chevron_right</span> 3. User Conduct</a></li>
+        <li><a href="#projects" class="toc-link"><span class="mi">chevron_right</span> 4. Projects &amp; Fees</a></li>
+        <li><a href="#liability" class="toc-link"><span class="mi">chevron_right</span> 5. Liability Limit</a></li>
+        <li><a href="#termination" class="toc-link"><span class="mi">chevron_right</span> 6. Termination</a></li>
+        <li><a href="#governing-law" class="toc-link"><span class="mi">chevron_right</span> 7. Governing Law</a></li>
+        <li><a href="#changes" class="toc-link"><span class="mi">chevron_right</span> 8. Modifications</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Card -->
+    <main class="legal-content-card gsap-reveal" id="legalContent">
+      <article class="legal-body">
+        
+        <section id="agreement" class="legal-section-block">
+          <h2><span class="mi">handshake</span> 1. Agreement to Terms</h2>
+          <p>These Terms &amp; Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and MindFrix ("we," "our," or "us"), concerning your access to and use of <a href="https://mindfrix.com" style="color: var(--orange); font-weight: 500;">mindfrix.com</a>, as well as any other media form, media channel, website, software product, custom AI agent, chatbot interface, or automation integration related, linked, or otherwise connected thereto (collectively, the "Services").</p>
+          <p>By accessing the Services, you agree that you have read, understood, and agree to be bound by all of these Terms &amp; Conditions. **If you do not agree with all of these terms, you are explicitly prohibited from using the Services and must cease use immediately.**</p>
+        </section>
+
+        <section id="ipr" class="legal-section-block">
+          <h2><span class="mi">copyright</span> 2. Intellectual Property Rights</h2>
+          <p>Unless otherwise indicated, the Services and all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics on the Site (collectively, the "Content") and the trademarks, service marks, and logos contained therein (the "Marks") are owned or controlled by us, and are protected by copyright, trademark laws, and other intellectual property rights.</p>
+          <h3>A. Our Proprietary Systems</h3>
+          <p>Except as explicitly outlined in a custom software agreement or client contract, MindFrix retains all right, title, and interest in our proprietary algorithms, baseline AI frameworks, chatbot interfaces, pipeline codes, and automation architecture designed or deployed by us.</p>
+          <h3>B. Client Deliverables</h3>
+          <p>Upon final payment for a custom project, the specific custom assets, design files, tailored website code, or databases designated as deliverables in your client scope of work shall be transferred to your ownership, subject to our license to use standard baseline integrations and libraries.</p>
+        </section>
+
+        <section id="user-conduct" class="legal-section-block">
+          <h2><span class="mi">gavel</span> 3. User Representations &amp; Prohibitions</h2>
+          <p>By using our website or automated customer portals, you represent and warrant that you will comply with these terms and all applicable local, national, and international laws.</p>
+          <p>You agree not to engage in any of the following prohibited behaviors:</p>
+          <ul>
+            <li>Systematically retrieve data or other content from the Services to create or compile, directly or indirectly, a database, directory, or repository without written permission from us.</li>
+            <li>Use the Services, including our customer support chatbots and contact portals, to send spam, unsolicited promotional contents, or malicious codes.</li>
+            <li>Attempt to bypass, disable, or disrupt security-related features of the Services or reverse-engineer the underlying algorithms and code structures.</li>
+            <li>Submit inaccurate, misleading, or fraudulent information through lead generation forms or chat interfaces.</li>
+          </ul>
+        </section>
+
+        <section id="projects" class="legal-section-block">
+          <h2><span class="mi">payments</span> 4. Projects, Consulting &amp; Billing</h2>
+          <p>We provide custom development, AI setup, software integration, and digital marketing consulting services. The specific scope, timeline, deliverables, fees, and payment schedule for any project will be clearly defined in a separate, written **Service Agreement** or **Statement of Work (SOW)** executed by both parties.</p>
+          <p>Unless specified otherwise in your SOW, the following terms apply:</p>
+          <ul>
+            <li><strong>Project Deposits:</strong> Development projects require an upfront deposit before design or technical work commences.</li>
+            <li><strong>Milestone Payments:</strong> Remaining balances are invoiced at predetermined development stages. Late payments may result in an immediate suspension of integration services.</li>
+            <li><strong>Support Contracts:</strong> Monthly support and maintenance for live AI agents and databases are billed on a recurring monthly retainer, payable at the start of each billing cycle.</li>
+          </ul>
+        </section>
+
+        <section id="liability" class="legal-section-block">
+          <h2><span class="mi">warning</span> 5. Limitation of Liability &amp; Disclaimers</h2>
+          <p>THE SERVICES ARE PROVIDED ON AN "AS-IS" AND "AS-AVAILABLE" BASIS. YOU AGREE THAT YOUR USE OF THE SERVICES WILL BE AT YOUR SOLE RISK. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, IN CONNECTION WITH THE SERVICES AND YOUR USE THEREOF.</p>
+          <h3>A. AI Conversational Outputs</h3>
+          <p>MindFrix builds intelligent, automated AI agents and chatbot interfaces trained on business details. While we strive to maximize accuracy, AI outputs are based on probabilistic algorithms. **We do not guarantee the absolute accuracy, completeness, or reliability of every answer generated by our automated systems and chatbots.** MindFrix is not liable for errors, misunderstandings, or contract breaches resulting from automated chat dialogues.</p>
+          <h3>B. Limitation of Damages</h3>
+          <p>IN NO EVENT WILL MINDFRIX, OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY DIRECT, INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT, LOST REVENUE, LOSS OF DATA, OR OTHER DAMAGES ARISING FROM YOUR USE OF THE SERVICES, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+        </section>
+
+        <section id="termination" class="legal-section-block">
+          <h2><span class="mi">cancel</span> 6. Term and Termination</h2>
+          <p>These Terms &amp; Conditions shall remain in full force and effect while you use our Services. Without limiting any other provision of these terms, we reserve the right to, in our sole discretion and without notice or liability, deny access to and use of the Services to any person for any reason, including without limitation for breach of any representation, warranty, or covenant contained in these terms.</p>
+          <p>If we terminate or suspend your account or access for any reason, you are prohibited from registering or creating a new account under your name, a fake name, or the name of any third party.</p>
+        </section>
+
+        <section id="governing-law" class="legal-section-block">
+          <h2><span class="mi">balance</span> 7. Governing Law</h2>
+          <p>These Terms &amp; Conditions and your use of our Services are governed by and construed in accordance with the laws of **India**, without regard to its conflict of law principles. Any legal action, suit, or dispute arising out of or related to these terms shall be settled exclusively in the courts located in **Kolkata, West Bengal, India**.</p>
+        </section>
+
+        <section id="changes" class="legal-section-block">
+          <h2><span class="mi">edit</span> 8. Modifications and Contact</h2>
+          <p>We reserve the right, in our sole discretion, to modify, update, or replace these Terms &amp; Conditions at any time. We will alert you about any changes by updating the "Last Updated" date at the top of this document.</p>
+          <p>It is your responsibility to periodically review these Terms &amp; Conditions to stay informed of updates. Your continued use of our Services after the publication of revisions will constitute your acceptance of the revised terms.</p>
+          <p>If you have any questions, clarifications, or disputes regarding these Terms &amp; Conditions, please contact us at:</p>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:contact@mindfrix.com" style="color: var(--orange); font-weight: 500;">contact@mindfrix.com</a></li>
+            <li><strong>Phone:</strong> <a href="tel:+917601929603" style="color: var(--orange); font-weight: 500;">+91 76019 29603</a></li>
+          </ul>
+        </section>
+
+      </article>
+    </main>
+  </div>
+</div>
+
+<!-- CONTACT / FOOTER -->
+<div class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="https://www.mindfrix.com/mindfrix_logo.svg" alt="MindFrix"
+            onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block'">
+          <div id="footer-logo-fallback" style="display:none" class="footer-logo-text">Mind<span>Frix</span></div>
+        </div>
+        <p class="footer-tagline">Building intelligent systems for businesses that refuse to stay still.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="index.html#services"><span class="mi">build</span> Services</a></li>
+          <li><a href="index.html#usecases"><span class="mi">category</span> Use Cases</a></li>
+          <li><a href="index.html#clients"><span class="mi">star</span> Clients</a></li>
+          <li><a href="index.html#contact"><span class="mi">mail</span> Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Get In Touch</div>
+        <ul class="footer-links">
+          <li><a href="mailto:contact@mindfrix.com"><span class="mi">mail</span> contact@mindfrix.com</a></li>
+          <li><a href="tel:+917601929603"><span class="mi">call</span> +91 76019 29603</a></li>
+          <li><a href="https://mindfrix.com" target="_blank" rel="noopener"><span class="mi">language</span> mindfrix.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 MindFrix. All rights reserved.</span>
+      <span class="footer-bottom-links">
+        <a href="privacy.html" class="footer-bottom-link">Privacy Policy</a>
+        <span class="footer-bullet">•</span>
+        <a href="terms.html" class="footer-bottom-link">Terms &amp; Conditions</a>
+      </span>
+      <span>AI Systems · Automation · Growth</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── GSAP SETUP ─────────────────────────────────────────── */
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.set('.gsap-reveal', { visibility: 'visible' });
+
+/* ─── SCROLL PROGRESS BAR ────────────────────────────────── */
+gsap.to('#progressBar', {
+  scaleX: 1,
+  ease: 'none',
+  scrollTrigger: { scrub: 0.3, start: 'top top', end: 'bottom bottom' }
+});
+
+/* ─── NAV SCROLL EFFECT ──────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navInner').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* ─── MOBILE NAV ─────────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const drawer = document.getElementById('mobileDrawer');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.drawer-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ─── HERO & CONTENT ANIMATIONS ───────────────────────────── */
+const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+heroTl
+  .from('#heroChip', { opacity: 0, y: 20, duration: 0.6 })
+  .from('#heroH1',    { opacity: 0, y: 28, duration: 0.75 }, '-=0.3')
+  .from('#heroSub',   { opacity: 0, y: 20, duration: 0.6 }, '-=0.45')
+  .from('#legalSidebar', { opacity: 0, x: -30, duration: 0.7 }, '-=0.2')
+  .from('#legalContent', { opacity: 0, y: 30, duration: 0.75 }, '-=0.55');
+
+/* ─── ACTIVE LINK SYNC ON SCROLL ────────────────────────── */
+const sections = document.querySelectorAll('.legal-section-block');
+const tocLinks = document.querySelectorAll('.toc-link');
+
+function syncActiveToc() {
+  let activeId = '';
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if (rect.top <= 140 && rect.bottom >= 140) {
+      activeId = sec.id;
+    }
+  });
+
+  if (activeId) {
+    tocLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + activeId);
+    });
+  }
+}
+window.addEventListener('scroll', syncActiveToc);
+
+/* ─── TILT EFFECT ────────────────────────────────────────── */
+document.querySelectorAll('.legal-sidebar, .legal-content-card').forEach(el => {
+  el.style.transformStyle = 'preserve-3d';
+  el.addEventListener('mousemove', (e) => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xPct = (x / rect.width) - 0.5;
+    const yPct = (y / rect.height) - 0.5;
+    gsap.to(el, { 
+      rotationY: xPct * 3, 
+      rotationX: -yPct * 3, 
+      duration: 0.4, 
+      ease: 'power2.out', 
+      transformPerspective: 1000 
+    });
+  });
+  el.addEventListener('mouseleave', () => {
+    gsap.to(el, { rotationY: 0, rotationX: 0, duration: 0.7, ease: 'power2.out' });
+  });
+});
+</script>
+</body>
+</html>

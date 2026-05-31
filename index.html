@@ -844,6 +844,22 @@ nav {
   gap: 16px; padding-top: 24px; border-top: 1px solid var(--border);
   font-size: 13px; color: var(--text-3);
 }
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-bottom-link {
+  transition: color 0.18s ease;
+}
+.footer-bottom-link:hover {
+  color: var(--orange);
+}
+.footer-bullet {
+  opacity: 0.5;
+  user-select: none;
+}
+
 
 /* ─── REVEAL ─────────────────────────────────────────────── */
 /* CHANGED: Swapped opacity: 0 for visibility: hidden to allow GSAP .from() to work flawlessly while avoiding layout flash */
@@ -1269,6 +1285,11 @@ nav {
     </div>
     <div class="footer-bottom">
       <span>© 2025 MindFrix. All rights reserved.</span>
+      <span class="footer-bottom-links">
+        <a href="privacy.html" class="footer-bottom-link">Privacy Policy</a>
+        <span class="footer-bullet">•</span>
+        <a href="terms.html" class="footer-bottom-link">Terms &amp; Conditions</a>
+      </span>
       <span>AI Systems · Automation · Growth</span>
     </div>
   </div>
