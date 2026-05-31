@@ -600,14 +600,15 @@ nav {
 }
 .services-inner { max-width: 1140px; margin: 0 auto; }
 .services-header { margin-bottom: 28px; }
-.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; grid-auto-rows: 1fr; }
-.service-card {
-  background: #fff; border: 1px solid var(--border);
-  border-radius: var(--r-xl); padding: 28px;
-  display: flex; flex-direction: column; gap: 16px;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.25s;
-  height: 100%;
-}
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; grid-auto-rows: 1fr; align-items: start; }
+    .service-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--r-xl); padding: 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.25s;
+      height: 100%;
+      align-self: start;
+    }
 .service-card:hover {
   border-color: rgba(244,103,58,0.3);
   box-shadow: 0 12px 40px rgba(244,103,58,0.1);
