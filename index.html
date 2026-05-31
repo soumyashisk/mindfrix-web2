@@ -93,6 +93,7 @@ img { display: block; max-width: 100%; }
   display: inline-block;
   white-space: nowrap;
   direction: ltr;
+  font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
   font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
@@ -263,35 +264,51 @@ nav {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
-  align-items: start;
+  align-items: stretch;
 }
 
-/* ─── METRICS ────────────────────────────────────────────── */
-.hero-metrics {
+/* Make side widgets match the fixed chat widget height */
+.widget-connections,
+.widget-automation {
+  display: flex;
+  flex-direction: column;
+  height: 340px; /* match .widget-chat height */
+}
+
+/* Let connection labels sit at the bottom and flows expand */
+.widget-connections .conn-labels { margin-top: auto; }
+.widget-automation .automation-flow { flex: 1; }
+
+/* ─── STATS / IMPACT SECTION ────────────────────────────── */
+.stats-section {
   position: relative; z-index: 1;
+  padding: 56px 24px;
   max-width: 1140px; margin: 0 auto;
-  padding: 0 24px 100px;
+}
+.stats-inner { max-width: 1140px; margin: 0 auto; }
+.stats-header { text-align: center; margin-bottom: 24px; }
+.stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 20px;
+  align-items: stretch;
 }
-.metric-card {
-  background: var(--surface);
-  backdrop-filter: var(--glass);
-  -webkit-backdrop-filter: var(--glass);
-  border: 1px solid rgba(255,255,255,0.9);
-  border-radius: var(--r-lg); padding: 28px;
-  text-align: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  transition: transform 0.25s, box-shadow 0.25s;
+.stat-card {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px 18px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-height: 140px;
+  text-align:center;
 }
-.metric-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
-.metric-num {
+.stat-number {
   font-family: var(--font-display);
   font-size: 2.4rem; font-weight: 600; color: var(--orange);
-  letter-spacing: -0.03em; line-height: 1; margin-bottom: 6px;
+  line-height:1; margin-bottom: 8px;
 }
-.metric-label { font-size: 13px; color: var(--text-2); font-weight: 400; }
+.stat-title { font-size: 14px; color: var(--text-2); }
+.stat-sub { font-size: 15px; color: var(--text-2); max-width: 640px; margin: 0 auto; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
@@ -397,7 +414,7 @@ nav {
   padding: 2px 8px; border-radius: 999px;
 }
 .conn-nodes {
-  position: relative; height: 130px;
+  position: relative; width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
 }
 .conn-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
@@ -416,7 +433,7 @@ nav {
   left: 50%; top: 50%;
   transform: translate(-50%, -50%);
   border: none;
-  box-shadow: 0 4px 20px rgba(244,103,58,0.35);
+  box-shadow: none;
 }
 .conn-node-center .mi { color: #fff; font-size: 20px; }
 .conn-pulse {
@@ -441,6 +458,21 @@ nav {
 .conn-labels {
   display: flex; flex-direction: column; gap: 6px; margin-top: 10px;
 }
+
+/* Rounded panel for connection diagram inside the card */
+.conn-panel {
+  /* subtle orange-tinted panel to complement the central node */
+  background: linear-gradient(180deg, rgba(244,103,58,0.06) 0%, rgba(244,103,58,0.03) 100%);
+  border: 1px solid rgba(244,103,58,0.06);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; max-width: 320px;
+  height: 160px;
+  margin: 0 auto 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.02);
+}
+.conn-panel .conn-nodes { height: 100%; }
 .conn-label-row {
   display: flex; align-items: center; gap: 8px;
   font-size: 11px; color: var(--text-2);
@@ -564,16 +596,17 @@ nav {
   background: var(--bg2);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  padding: 96px 24px;
+  padding: 64px 24px;
 }
 .services-inner { max-width: 1140px; margin: 0 auto; }
-.services-header { margin-bottom: 52px; }
-.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.services-header { margin-bottom: 28px; }
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; grid-auto-rows: 1fr; }
 .service-card {
   background: #fff; border: 1px solid var(--border);
-  border-radius: var(--r-xl); padding: 36px;
-  display: flex; flex-direction: column; gap: 20px;
+  border-radius: var(--r-xl); padding: 28px;
+  display: flex; flex-direction: column; gap: 16px;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.25s;
+  height: 100%;
 }
 .service-card:hover {
   border-color: rgba(244,103,58,0.3);
@@ -638,7 +671,10 @@ nav {
   left: -120px; bottom: -140px;
   background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 72%);
 }
-.usecases-layout { display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: start; }
+.usecases-layout {
+  display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: start;
+  max-width: 1140px; margin: 0 auto; padding: 0 56px;
+}
 .usecases-header { position: sticky; top: 100px; }
 .usecases-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .usecase-card {
@@ -844,11 +880,10 @@ nav {
   .nav-inner { padding: 10px 10px 10px 18px; }
 
   .hero { padding: 120px 24px 60px; text-align: left; }
-  .hero-chip { }
   .hero-actions { justify-content: flex-start; }
   .hero-sub { margin-left: 0; max-width: 100%; }
   .hero-float-badges { justify-content: flex-start; }
-  .hero-metrics { grid-template-columns: 1fr 1fr; gap: 10px; padding-bottom: 64px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding-bottom: 64px; }
 
   .hero-widgets { grid-template-columns: 1fr; max-width: 480px; }
 
@@ -858,7 +893,7 @@ nav {
   .services-grid { grid-template-columns: 1fr; }
 
   .usecases-panel { padding: 40px 24px; border-radius: 32px; }
-  .usecases-layout { grid-template-columns: 1fr; gap: 40px; }
+  .usecases-layout { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
   .usecases-header { position: static; }
   .usecases-grid { grid-template-columns: 1fr; }
 
@@ -871,7 +906,7 @@ nav {
 @media (max-width: 600px) {
   .hero-h1 { font-size: 2.2rem; }
   .hero { padding: 110px 24px 52px; }
-  .hero-metrics { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; }
   .hero-float-badges { gap: 8px; }
   .float-badge { font-size: 11px; padding: 6px 11px; }
   .tcard { width: 280px; }
@@ -984,7 +1019,8 @@ nav {
       <div class="widget-connections-title">Connected Integrations</div>
       <div class="widget-badge">4 Active</div>
     </div>
-    <div class="conn-nodes">
+      <div class="conn-panel">
+        <div class="conn-nodes">
       <svg class="conn-svg" id="connSvg"></svg>
       <div class="conn-pulse"></div>
       <div class="conn-node conn-node-center" id="centerNode"><span class="mi">smart_toy</span></div>
@@ -992,7 +1028,8 @@ nav {
       <div class="conn-node conn-node-2" id="node2"><span class="mi">analytics</span></div>
       <div class="conn-node conn-node-3" id="node3"><span class="mi">inventory</span></div>
       <div class="conn-node conn-node-4" id="node4"><span class="mi">cloud</span></div>
-    </div>
+        </div>
+      </div>
     <div class="conn-labels">
       <div class="conn-label-row"><div class="conn-dot" style="background:#6366f1"></div> Email & CRM sync</div>
       <div class="conn-label-row"><div class="conn-dot" style="background:#22c55e"></div> Analytics pipeline</div>
@@ -1063,21 +1100,30 @@ nav {
   </div>
 </div>
 
-<!-- METRICS -->
-<div class="hero-metrics wrap">
-  <div class="metric-card gsap-reveal">
-    <div class="metric-num" data-count="4" data-suffix="×">4×</div>
-    <div class="metric-label">Faster operations on average</div>
+<!-- STATS / IMPACT -->
+<section class="stats-section" aria-labelledby="statsHeading">
+  <div class="wrap stats-inner">
+    <div class="stats-header gsap-reveal">
+      <div class="section-label"><span class="mi">bolt</span> Impact</div>
+      <h2 id="statsHeading" class="section-title">Results We Deliver</h2>
+      <p class="section-sub stat-sub">Metrics that show how our systems improve operations and scale businesses.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card gsap-reveal">
+        <div class="metric-num stat-number" data-count="4" data-suffix="×">4×</div>
+        <div class="metric-label stat-title">Faster operations on average</div>
+      </div>
+      <div class="stat-card gsap-reveal">
+        <div class="metric-num stat-number" data-count="60" data-suffix="%">60%</div>
+        <div class="metric-label stat-title">Reduction in manual labour</div>
+      </div>
+      <div class="stat-card gsap-reveal">
+        <div class="metric-num stat-number" data-count="9" data-suffix="+">9+</div>
+        <div class="metric-label stat-title">Businesses transformed</div>
+      </div>
+    </div>
   </div>
-  <div class="metric-card gsap-reveal">
-    <div class="metric-num" data-count="60" data-suffix="%">60%</div>
-    <div class="metric-label">Reduction in manual labour</div>
-  </div>
-  <div class="metric-card gsap-reveal">
-    <div class="metric-num" data-count="9" data-suffix="+">9+</div>
-    <div class="metric-label">Businesses transformed</div>
-  </div>
-</div>
+</section>
 
 <!-- LESS / MORE -->
 <div class="contrast-section" id="contrastSection">
@@ -1144,23 +1190,21 @@ nav {
 
 <!-- USE CASES -->
 <div class="usecases-section dark-theme" id="usecases">
-  <div class="usecases-panel">
-    <div class="usecases-layout">
-      <div class="usecases-header gsap-reveal">
-        <div class="section-label"><span class="mi">category</span> Use Cases</div>
-        <h2 class="section-title">Where Our Systems Shine</h2>
-        <p class="section-sub">Real problems. Real automation. Across every function of your business.</p>
-      </div>
-      <div class="usecases-grid">
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">headset_mic</span></div><div class="usecase-text">Customer Support Automation</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">leaderboard</span></div><div class="usecase-text">Lead Qualification</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">menu_book</span></div><div class="usecase-text">Internal Knowledge Assistants</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">receipt_long</span></div><div class="usecase-text">Invoice Processing</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">edit_note</span></div><div class="usecase-text">Meeting Notes &amp; Summaries</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">bar_chart</span></div><div class="usecase-text">Report Generation</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">query_stats</span></div><div class="usecase-text">Data Analysis &amp; Business Intelligence</div></div>
-        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">help_center</span></div><div class="usecase-text">Employee Help Desks</div></div>
-      </div>
+  <div class="usecases-layout">
+    <div class="usecases-header gsap-reveal">
+      <div class="section-label"><span class="mi">category</span> Use Cases</div>
+      <h2 class="section-title">Where Our Systems Shine</h2>
+      <p class="section-sub">Real problems. Real automation. Across every function of your business.</p>
+    </div>
+    <div class="usecases-grid">
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">headset_mic</span></div><div class="usecase-text">Customer Support Automation</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">leaderboard</span></div><div class="usecase-text">Lead Qualification</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">menu_book</span></div><div class="usecase-text">Internal Knowledge Assistants</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">receipt_long</span></div><div class="usecase-text">Invoice Processing</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">edit_note</span></div><div class="usecase-text">Meeting Notes &amp; Summaries</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">bar_chart</span></div><div class="usecase-text">Report Generation</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">query_stats</span></div><div class="usecase-text">Data Analysis &amp; Business Intelligence</div></div>
+      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">help_center</span></div><div class="usecase-text">Employee Help Desks</div></div>
     </div>
   </div>
 </div>
@@ -1342,10 +1386,11 @@ gsap.from('.usecase-card', {
 document.querySelectorAll('.metric-num[data-count]').forEach(el => {
   const target = parseFloat(el.dataset.count);
   const suffix = el.dataset.suffix || '';
-  gsap.from({ val: 0 }, {
+  const state = { val: 0 };
+  gsap.to(state, {
     val: target, duration: 1.8, ease: 'power2.out',
-    onUpdate: function() {
-      el.textContent = (Number.isInteger(target) ? Math.round(this.targets()[0].val) : this.targets()[0].val.toFixed(1)) + suffix;
+    onUpdate: () => {
+      el.textContent = (Number.isInteger(target) ? Math.round(state.val) : state.val.toFixed(1)) + suffix;
     },
     scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
   });
