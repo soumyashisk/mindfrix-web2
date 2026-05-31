@@ -72,9 +72,7 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body {
   background-color: var(--bg);
-  background-image: linear-gradient(var(--border2) 1px, transparent 1px), linear-gradient(90deg, var(--border2) 1px, transparent 1px);
-  background-size: 32px 32px;
-  background-position: center top;
+  background-image: radial-gradient(circle at top, rgba(244,103,58,0.06), transparent 36%), linear-gradient(to bottom, rgba(255,255,255,0.5), rgba(255,255,255,0));
   color: var(--text-1);
   font-family: var(--font-body);
   font-size: 16px;
@@ -607,14 +605,45 @@ nav {
 /* ─── USE CASES ──────────────────────────────────────────── */
 .usecases-section {
   position: relative; z-index: 1;
-  padding: 96px 24px; max-width: 1140px; margin: 0 auto;
+  background: linear-gradient(180deg, #0b0b0c 0%, #111113 100%);
+  padding: 88px 24px;
+}
+.usecases-section .usecases-panel {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.usecases-panel {
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 44px;
+  padding: 64px 56px;
+  overflow: hidden;
+}
+.usecases-panel::before,
+.usecases-panel::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(24px);
+}
+.usecases-panel::before {
+  width: 360px; height: 360px;
+  right: -120px; top: -140px;
+  background: radial-gradient(circle, rgba(244,103,58,0.14) 0%, transparent 70%);
+}
+.usecases-panel::after {
+  width: 280px; height: 280px;
+  left: -120px; bottom: -140px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 72%);
 }
 .usecases-layout { display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: start; }
 .usecases-header { position: sticky; top: 100px; }
 .usecases-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 .usecase-card {
   background: #fff; border: 1px solid var(--border);
-  border-radius: var(--r-lg); padding: 20px;
+  border-radius: 24px; padding: 20px;
   display: flex; align-items: flex-start; gap: 14px;
   transition: border-color 0.18s, background 0.18s, transform 0.2s;
 }
@@ -635,14 +664,17 @@ nav {
 
 /* ─── DARK THEME SECTION (VISUAL VARIETY) ───────────────── */
 .dark-theme {
-  background-color: #0B0B0C;
   color: #fff;
+}
+.dark-theme .usecases-panel {
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.02) 100%);
 }
 .dark-theme .section-title { color: #fff; }
 .dark-theme .section-sub { color: #A1A1AA; }
 .dark-theme .usecase-card {
   background: rgba(255,255,255,0.03);
   border-color: rgba(255,255,255,0.08);
+  border-radius: 24px;
 }
 .dark-theme .usecase-text { color: #E4E4E7; }
 .dark-theme .usecase-dot { background: rgba(255,255,255,0.06); }
@@ -825,6 +857,7 @@ nav {
 
   .services-grid { grid-template-columns: 1fr; }
 
+  .usecases-panel { padding: 40px 24px; border-radius: 32px; }
   .usecases-layout { grid-template-columns: 1fr; gap: 40px; }
   .usecases-header { position: static; }
   .usecases-grid { grid-template-columns: 1fr; }
@@ -1111,21 +1144,23 @@ nav {
 
 <!-- USE CASES -->
 <div class="usecases-section dark-theme" id="usecases">
-  <div class="usecases-layout">
-    <div class="usecases-header gsap-reveal">
-      <div class="section-label"><span class="mi">category</span> Use Cases</div>
-      <h2 class="section-title">Where Our Systems Shine</h2>
-      <p class="section-sub">Real problems. Real automation. Across every function of your business.</p>
-    </div>
-    <div class="usecases-grid">
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">headset_mic</span></div><div class="usecase-text">Customer Support Automation</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">leaderboard</span></div><div class="usecase-text">Lead Qualification</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">menu_book</span></div><div class="usecase-text">Internal Knowledge Assistants</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">receipt_long</span></div><div class="usecase-text">Invoice Processing</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">edit_note</span></div><div class="usecase-text">Meeting Notes &amp; Summaries</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">bar_chart</span></div><div class="usecase-text">Report Generation</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">query_stats</span></div><div class="usecase-text">Data Analysis &amp; Business Intelligence</div></div>
-      <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">help_center</span></div><div class="usecase-text">Employee Help Desks</div></div>
+  <div class="usecases-panel">
+    <div class="usecases-layout">
+      <div class="usecases-header gsap-reveal">
+        <div class="section-label"><span class="mi">category</span> Use Cases</div>
+        <h2 class="section-title">Where Our Systems Shine</h2>
+        <p class="section-sub">Real problems. Real automation. Across every function of your business.</p>
+      </div>
+      <div class="usecases-grid">
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">headset_mic</span></div><div class="usecase-text">Customer Support Automation</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">leaderboard</span></div><div class="usecase-text">Lead Qualification</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">menu_book</span></div><div class="usecase-text">Internal Knowledge Assistants</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">receipt_long</span></div><div class="usecase-text">Invoice Processing</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">edit_note</span></div><div class="usecase-text">Meeting Notes &amp; Summaries</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">bar_chart</span></div><div class="usecase-text">Report Generation</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">query_stats</span></div><div class="usecase-text">Data Analysis &amp; Business Intelligence</div></div>
+        <div class="usecase-card gsap-reveal"><div class="usecase-dot"><span class="mi">help_center</span></div><div class="usecase-text">Employee Help Desks</div></div>
+      </div>
     </div>
   </div>
 </div>
