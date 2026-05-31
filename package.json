@@ -1,0 +1,18 @@
+{
+  "name": "mindfrix-web2",
+  "version": "1.0.0",
+  "description": "MindFrix Web and Serverless Hono API",
+  "main": "api/index.ts",
+  "scripts": {
+    "dev": "bun --watch api/index.ts",
+    "start": "bun api/index.ts"
+  },
+  "dependencies": {
+    "@notionhq/client": "latest",
+    "hono": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.2",
+    "typescript": "^5.4.5"
+  }
+}

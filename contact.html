@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact MindFrix. Initiate your design and automation consultation.">
+  <meta name="keywords" content="Contact MindFrix, AI systems contact, automation inquiry">
+  <meta name="author" content="MindFrix">
+  <title>Contact Us — MindFrix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,300,1,0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────── */
+    :root {
+      --font-display: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --orange: #F4673A;
+      --orange-soft: #FFF0EB;
+      --orange-mid: #FFDDCF;
+      --bg: #FAFAF8;
+      --surface: rgba(255, 255, 255, 0.72);
+      --border: rgba(0, 0, 0, 0.07);
+      --text-1: #111110;
+      --text-2: #5A5955;
+      --text-3: #9B9894;
+      --glass: blur(20px) saturate(1.6);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+      height: 100%;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: radial-gradient(circle at top, rgba(244, 103, 58, 0.06), transparent 36%), linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+      color: var(--text-1);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ─── MATERIAL ICONS ─────────────────────────────────────── */
+    .mi {
+      font-family: 'Material Symbols Rounded';
+      font-style: normal;
+      font-size: 22px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      direction: ltr;
+      font-feature-settings: 'liga';
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+
+    /* ─── NOISE TEXTURE ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    /* ─── AMBIENT BLOBS ──────────────────────────────────────── */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+    }
+
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(244, 103, 58, 0.08) 0%, transparent 70%);
+      top: -150px;
+      right: -100px;
+    }
+
+    .blob-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(244, 180, 58, 0.06) 0%, transparent 70%);
+      bottom: -100px;
+      left: -100px;
+    }
+
+    /* ─── BACK BUTTON (TOP LEFT) ────────────────────────────── */
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 10px 20px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-1);
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, transform 0.15s, box-shadow 0.2s;
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(0, 0, 0, 0.14);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .btn-outline .mi {
+      font-size: 18px;
+      color: var(--orange);
+    }
+
+    /* ─── UNWRAPPED FORM CONTAINER ──────────────────────────── */
+    .contact-container {
+      width: 100%;
+      max-width: 460px;
+      margin: 110px 24px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-form-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .contact-form-title span {
+      color: var(--orange);
+    }
+
+    .contact-form-subtitle {
+      font-size: 14px;
+      color: var(--text-2);
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+    }
+
+    .form-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-2);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-label span {
+      font-weight: 400;
+      color: var(--text-3);
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper .mi {
+      position: absolute;
+      left: 16px;
+      color: var(--text-3);
+      pointer-events: none;
+      font-size: 20px;
+      transition: color 0.25s;
+    }
+
+    .form-input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.6);
+      padding: 13px 16px 13px 46px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--text-1);
+      transition: border-color 0.25s, box-shadow 0.25s, background-color 0.25s;
+      outline: none;
+    }
+
+    .form-input::placeholder {
+      color: var(--text-3);
+    }
+
+    .form-input:focus {
+      border-color: var(--orange);
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(244, 103, 58, 0.08);
+    }
+
+    .form-input:focus~.mi {
+      color: var(--orange);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 15px 32px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.15s, box-shadow 0.2s;
+      white-space: nowrap;
+      width: 100%;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(244, 103, 58, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #e05530;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(244, 103, 58, 0.25);
+    }
+
+    .btn-primary .mi {
+      font-size: 18px;
+    }
+
+    /* Interactive Success Screen */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px 10px;
+    }
+
+    .success-checkmark-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--orange-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(244, 103, 58, 0.1);
+      position: relative;
+    }
+
+    .success-checkmark-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px dashed var(--orange-mid);
+      animation: rotateClockwise 15s linear infinite;
+    }
+
+    @keyframes rotateClockwise {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .success-checkmark-wrap .mi {
+      color: var(--orange);
+      font-size: 40px;
+    }
+
+    .success-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 12px;
+    }
+
+    .success-msg {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+
+    .success-msg strong {
+      color: var(--text-1);
+    }
+
+    .gsap-reveal {
+      visibility: hidden;
+    }
+
+    /* ─── RESPONSIVENESS ─────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .btn-outline {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+
+      .contact-container {
+        margin: 90px auto 40px;
+        padding: 0 20px;
+        width: 100%;
+      }
+    }
+  </style>
+  <noscript>
+    <style>
+      .gsap-reveal {
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+    </style>
+  </noscript>
+</head>
+
+<body>
+
+  <div class="ambient">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- BACK BUTTON (TOP LEFT IN VIEWPORT) -->
+  <a href="index.html" class="btn-outline back-btn gsap-reveal" id="backBtn">
+    <span class="mi">arrow_back</span> Back
+  </a>
+
+  <div class="contact-container">
+
+    <!-- Raw Contact Form content directly on background -->
+    <main id="contactCard">
+
+      <!-- Normal Form Content -->
+      <div id="formContent" class="gsap-reveal">
+        <h1 class="contact-form-title">Let's <span>Connect</span></h1>
+        <p class="contact-form-subtitle">Fill in the details below to initiate your design and automation consultation.
+        </p>
+
+        <form id="mindfrixContactForm">
+          <div class="form-grid">
+
+            <!-- Founder Name (Required) -->
+            <div class="form-group">
+              <label class="form-label" for="founderName">Founder Name *</label>
+              <div class="input-wrapper">
+                <input type="text" id="founderName" name="founderName" class="form-input" placeholder="e.g. Soumyashis"
+                  required>
+                <span class="mi">person</span>
+              </div>
+            </div>
+
+            <!-- Phone Number (Required) -->
+            <div class="form-group">
+              <label class="form-label" for="phoneNumber">Phone Number *</label>
+              <div class="input-wrapper">
+                <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input"
+                  placeholder="e.g. +91 76019 29603" required>
+                <span class="mi">smartphone</span>
+              </div>
+            </div>
+
+            <!-- Company Name (Optional) -->
+            <div class="form-group">
+              <label class="form-label" for="companyName">Company Name <span>(Optional)</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="companyName" name="companyName" class="form-input"
+                  placeholder="e.g. Tradee Point">
+                <span class="mi">business</span>
+              </div>
+            </div>
+
+            <!-- Email Address (Optional) -->
+            <div class="form-group">
+              <label class="form-label" for="emailAddress">Email Address <span>(Optional)</span></label>
+              <div class="input-wrapper">
+                <input type="email" id="emailAddress" name="emailAddress" class="form-input"
+                  placeholder="e.g. support@tradee.com">
+                <span class="mi">mail</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-primary form-submit-btn" id="submitBtn">
+            Send Message <span class="mi">send</span>
+          </button>
+          <div id="formErrorMessage" style="color: #ef4444; font-size: 13.5px; text-align: center; margin-top: 16px; display: none; font-weight: 500; line-height: 1.4;"></div>
+        </form>
+      </div>
+
+      <!-- Success Screen State -->
+      <div id="successContent" class="success-state">
+        <div class="success-checkmark-wrap">
+          <span class="mi">check</span>
+        </div>
+        <h2 class="success-title">Inquiry Logged!</h2>
+        <p class="success-msg" id="successMessage"></p>
+        <button class="btn-primary" onclick="resetContactForm()" style="border-radius:12px; font-weight:600;">
+          <span class="mi">replay</span> Submit Another
+        </button>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    /* ─── GSAP SETUP ─────────────────────────────────────────── */
+    gsap.set('.gsap-reveal', { visibility: 'visible' });
+
+    /* ─── HERO & CONTENT ENTRANCE TIMELINE ────────────────────── */
+    const entranceTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    entranceTl
+      .from('#backBtn', { opacity: 0, x: -20, duration: 0.6 })
+      .from('#formContent', { opacity: 0, y: 30, duration: 0.75 }, '-=0.45');
+
+    /* ─── DYNAMIC FORM INTERACTIVE SUBMISSION ──────────────────── */
+    const contactForm = document.getElementById('mindfrixContactForm');
+    const formContent = document.getElementById('formContent');
+    const successContent = document.getElementById('successContent');
+    const successMessage = document.getElementById('successMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    const formErrorMessage = document.getElementById('formErrorMessage');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Collect Input Values
+      const founderNameVal = document.getElementById('founderName').value.trim();
+      const phoneNumberVal = document.getElementById('phoneNumber').value.trim();
+      const companyNameVal = document.getElementById('companyName').value.trim();
+      const emailAddressVal = document.getElementById('emailAddress').value.trim();
+
+      // Reset error state
+      formErrorMessage.style.display = 'none';
+      formErrorMessage.textContent = '';
+
+      // Set premium loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending... <span class="mi" style="animation: rotateClockwise 1.2s linear infinite; margin-left: 6px;">sync</span>';
+
+      // Dynamic URL resolution: relative for Vercel hostings, absolute fallback for local file previews
+      const apiEndpoint = window.location.protocol === 'file:' 
+        ? 'http://localhost:3000/api/contact' 
+        : '/api/contact';
+
+      // Submit to Hono backend
+      fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          founderName: founderNameVal,
+          phoneNumber: phoneNumberVal,
+          companyName: companyNameVal || undefined,
+          emailAddress: emailAddressVal || undefined
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(errData => {
+            throw new Error(errData.error || 'Failed to submit form.');
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          // Custom Success Message Rendering
+          let personalizeMsg = `Thanks for reaching out, <strong>${founderNameVal}</strong>! `;
+
+          if (companyNameVal) {
+            personalizeMsg += `We've successfully logged your inquiry for <strong>${companyNameVal}</strong>. `;
+          } else {
+            personalizeMsg += `We've successfully logged your inquiry. `;
+          }
+
+          personalizeMsg += `Our team will review your details and connect with you shortly at <strong>${phoneNumberVal}</strong>`;
+
+          if (emailAddressVal) {
+            personalizeMsg += ` and send a technical brief to <strong>${emailAddressVal}</strong>.`;
+          } else {
+            personalizeMsg += `.`;
+          }
+
+          successMessage.innerHTML = personalizeMsg;
+
+          // GSAP Transition from Form to Success State
+          gsap.to(formContent, {
+            opacity: 0,
+            y: -20,
+            duration: 0.4,
+            ease: 'power2.in',
+            onComplete: () => {
+              formContent.style.display = 'none';
+              successContent.style.display = 'flex';
+
+              // Animate Success State in
+              gsap.fromTo(successContent,
+                { opacity: 0, y: 20 },
+                { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+              );
+
+              // Fun micro-bounce on checkmark icon
+              gsap.fromTo('.success-checkmark-wrap',
+                { scale: 0.4, rotation: -45 },
+                { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(1.8)' }
+              );
+            }
+          });
+        } else {
+          throw new Error(data.error || 'Failed to submit inquiry.');
+        }
+      })
+      .catch(err => {
+        console.error("❌ Submission Error:", err);
+        formErrorMessage.innerHTML = `<span class="mi" style="font-size:16px; margin-right:4px; vertical-align:middle;">warning</span> ${err.message || 'Connection to database server failed. Please ensure backend is active.'}`;
+        formErrorMessage.style.display = 'block';
+        
+        // Quick visual shake effect on error message using GSAP
+        gsap.fromTo(formErrorMessage, 
+          { x: -10 }, 
+          { x: 0, duration: 0.4, ease: 'elastic.out(1, 0.3)' }
+        );
+      })
+      .finally(() => {
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send Message <span class="mi">send</span>';
+      });
+    });
+
+    /* ─── RESET CONTACT FORM FUNCTION ──────────────────────────── */
+    window.resetContactForm = function () {
+      contactForm.reset();
+
+      gsap.to(successContent, {
+        opacity: 0,
+        y: 20,
+        duration: 0.4,
+        ease: 'power2.in',
+        onComplete: () => {
+          successContent.style.display = 'none';
+          formContent.style.display = 'block';
+
+          gsap.fromTo(formContent,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+          );
+        }
+      });
+    };
+  </script>
+</body>
+
+</html>
